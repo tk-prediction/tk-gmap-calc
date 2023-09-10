@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==3.2.6"
+psycopg2-binary = "==2.9.1"
+djangorestframework-gis = "*"
+djangorestframework = "*"
+django-filter = "*"
+django-geojson ="*"
+leaflet = "*"
+numpy = "*"
+pandas = "*"
+shapely = "*"
+matplotlib = "*"
+pykrige = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
