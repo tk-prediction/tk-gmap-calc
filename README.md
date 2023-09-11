@@ -1,2 +1,2 @@
 # calc
-Calculation, and provide the products 
+Calculate the existense of G. That's all.
