@@ -49,7 +49,7 @@ map.on('click', onMapClick);
 
 
 /* GeoJSONレイヤーを追加方法*/
-$.getJSON("/gmap/geojson/", function(data) {
+$.getJSON("/gmap/geojson_ex/", function(data) {
     //layer.addData(data);
     L.geoJson(data).addTo(map);
 });

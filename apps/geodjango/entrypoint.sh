@@ -14,4 +14,6 @@ fi
 python3.8 manage.py flush --no-input
 python3.8 manage.py makemigrations
 python3.8 manage.py migrate
+#python3 manage.py shell
+#python3.8 manage.py runserver 
 exec "$@"

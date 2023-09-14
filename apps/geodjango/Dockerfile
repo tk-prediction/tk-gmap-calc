@@ -32,3 +32,4 @@ COPY . /usr/src/app/
 
 #パーミッションを適切に設定していないと下記が実行できない.
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+#CMD ["/bin/bash"]

@@ -10,6 +10,8 @@ import json
 from django.core.serializers import serialize
 import traceback
 
+from rest_framework import viewsets
+from Gmaps.serializers import G_surface_Serializer , G_dir_Serializer
 from Gmaps.models import G_surface , G_dir
 
 
@@ -57,3 +59,12 @@ class GeojsonAPI_direction(APIView):
             response = Response({}, status=status.HTTP_404_NOT_FOUND)
 
         return response
+
+class ExistenceViewSet(viewsets.ModelViewSet):
+    queryset = G_surface.objects.all()
+    serializer_class = G_surface_Serializer
+
+
+class DirectionViewSet(viewsets.ModelViewSet):
+    queryset = G_dir.objects.all()
+    serializer_class = G_dir_Serializer
