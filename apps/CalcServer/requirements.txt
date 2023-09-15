@@ -1,8 +1,0 @@
-numpy
-pandas
-scipy
-PyKrige
-matplotlib
-geopandas
-shapely
-PyYAML
