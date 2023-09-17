@@ -38,7 +38,6 @@ class dmd():
         x_size = np.size( X[0] )
 
         for i in range( N - h + 1 ):
-            print( i , "/", N - h )
             for j in range(h):
                 p1 = np.append( p1 , X[i + j ] ) 
                 p2 = np.append( p2 , X[i + j + 1 ] ) 
