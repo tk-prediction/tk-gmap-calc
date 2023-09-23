@@ -1,0 +1,19 @@
+#https://github.com/selfsryo/GeoDjangoOfficialTutorial
+#https://qiita.com/selfsryo/items/3a56b8303827121e92cb
+#https://www.zakioka.net/blog/docker-compose-db-for-app
+
+#docker-compose run models でうまく回った
+version: "3.7"
+services:
+  model:
+    build: 
+      context: .
+    volumes:
+      - ../../calc:/home/app/
+      - ../../geodjango/Gmaps/data_tmp:/home/app/data_tmp
+
+    working_dir: /home/app 
+    command: /bin/bash 
+    ports:
+      - 8080:8080
+    tty : true

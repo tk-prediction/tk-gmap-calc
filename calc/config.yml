@@ -1,0 +1,23 @@
+Model:
+  version: '2023/9/2'
+  srid_org: 4326     #wgs84
+  srid_calc: 6677    #平面直角座標9系
+  buff_meter: 100    #表示範囲のバッファ（メートル）
+  delta_mesh: 10     #表示範囲の補間解像度（メートル）
+  sigma_amp: 1000
+  lambda: 0.075
+  output: F #Trueで出力
+  check_surface: True    #Trueで表示
+  check_dir : F #True       #Trueで表示
+  check_predict: output # checkで表示のみ、outputで出力、それ以外：なし
+  check_dmdmode: True #Trueで表示
+  show_dmdmode:  True #Trueで表示
+
+Model2:
+  C_cofficient: 20.0
+  D_cofficient: 10.0
+  parallel_threads: 1
+
+  
+
+
