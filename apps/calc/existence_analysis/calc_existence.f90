@@ -212,10 +212,15 @@ contains
                 if(     dble( ts_out_count ) * dt_to_output >= time_tmp_out - dt_calc .and. & 
                     &   dble( ts_out_count ) * dt_to_output < time_tmp_out ) then 
                         ts_out_count = ts_out_count + 1 
-                        result( : , : , ts_out_count ) = exist( : , : )
+
+                        !エラー回避
+                        if( ts_out_count <= timesteps ) then  
+                            result( : , : , ts_out_count ) = exist( : , : )
+                        end if 
                 end if 
                 
             end if 
+
         END DO 
 
     end subroutine calc_existence_fokkerplanck

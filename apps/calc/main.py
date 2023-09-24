@@ -32,12 +32,10 @@ if __name__ == '__main__':
     Datas = SetFile.data(data_path , config['Model']['srid_org'] ) #データ読み込みクラスの設定
     Datas.read_and_transfer_data( config['Model']['srid_calc'] ) 
     
-    
     #データの更新====================================================
     #メモ：処理がかぶらないように、前ステップの計算結果をdata_tmpにコピーし、data_outを更新する
     subprocess.run( ["./SetTempFile.sh" , "arguments"] , shell = True )
-
-
+    
     '''
     #内挿補間手法（クリギング）==================================================
     SFIP = ExecKriging.surface_interpolate( Datas.gdf_transfered , config['Model']['srid_calc']  )
@@ -69,6 +67,7 @@ if __name__ == '__main__':
         z_pred = CalcExist.predict_mat( np.arange( -20 , -5 , 0.5 ) ) 
         ViewPredict.view_predict( z_pred , 0 , 4 , 100 , 1000 )     
     '''
+    
     CalcExist = CalcExistence.calc_existence_model2(  Datas.gdf_transfered ,
                                                 config['Model']['srid_calc'] , 
                                                 config['Model']['sigma_amp'] , 
@@ -84,17 +83,24 @@ if __name__ == '__main__':
                                   config['Model']['buff_meter'] ,  config['Model']['delta_mesh'] ) 
     
     past_day  = 20
-    pred_day  = 1
+    pred_day  = 2
     steps = 200
     z_pred = CalcExist.calc_existence_fp( past_day , pred_day , steps , config['Model']['check_surface'] )
     present_step = int( past_day / ( pred_day + past_day ) * steps )
     z_data = z_pred[ present_step ]
 
-    if config['Model']['check_predict'] == True:
-        ViewPredict.view_predict( z_pred , 0 , 4 , 100 , 1000 )     
     
+    if config['Model']['check_predict'] == "check": #表示のみ
+        vp_ex = ViewPredict.view_predict( z_pred , 0 , 4 , 100 , 1000)     
+        vp_ex.view_result()
+        
+    elif config['Model']['check_predict'] == "output" : #webGIS用データの出力
+        vp_ex = ViewPredict.view_predict( z_pred , 0 , 4 , 100 , 1000)             
+        folder = 'graphs' + os.sep + 'existence' + os.sep 
+        vp_ex.output_countour( folder )
+        
     
-    if config['Model']['output'] == True:
+    if config['Model']['output_geojson'] == True:
         Z_Geojson = CreateGeojson.create_geojson( 
                                         CalcExist.grid_x , 
                                         CalcExist.grid_y , 
@@ -117,7 +123,7 @@ if __name__ == '__main__':
             df.to_csv( fi , sep = "," )
             
         #pred
-        ViewPredict.view_predict( np.real(dmd_pred ) , 0 , 1 , 300 , 1000 )
+        vp_mode = ViewPredict.view_predict( np.real(dmd_pred ) , 0 , 1 , 300 , 1000 , "check" )
     
 
                                   
@@ -126,7 +132,7 @@ if __name__ == '__main__':
     dir_data = CalcDir.exec( z_data , config['Model']['check_dir'])
 
      
-    if config['Model']['output'] == True:
+    if config['Model']['output_geojson'] == True:
         DIR_Geojson = CreateGeojson.create_geojson( 
                                         CalcExist.grid_x , 
                                         CalcExist.grid_y , 

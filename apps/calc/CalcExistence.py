@@ -234,6 +234,6 @@ class calc_existence_model2():
                       np.array( passed_days , dtype='float64' ) , 
                       np.array( predict_days , dtype='float64' ) , 
                       z )
-                                       
+                                                              
         return z #結果を返す
                     
